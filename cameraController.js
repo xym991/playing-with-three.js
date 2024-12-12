@@ -13,13 +13,18 @@ const CameraController = {
   right: false,
   left: false,
   speed: false,
+  up: false,
+  down: false,
   adjustCameraPosition: function () {
     // console.log(this.forward, this.backward, this.left, this.right);
-    let val = this.speed ? 100 : 1;
+    let val = this.speed ? 10 : 1;
     if (this.forward) this.camera.position.z -= val;
     if (this.backward) this.camera.position.z += val;
     if (this.right) this.camera.position.x += val;
     if (this.left) this.camera.position.x -= val;
+    if (this.up) this.camera.position.y += val;
+    if (this.down) this.camera.position.y -= val;
+
     this.light.position.set(...this.camera.position);
     // console.log(this.light.position);
   },
@@ -43,8 +48,15 @@ document.addEventListener("keydown", (e) => {
     case "D":
       CameraController.right = true;
       break;
-    case "SHIFT":
+    case " ":
       CameraController.speed = true;
+      break;
+    case "SHIFT":
+      CameraController.up = true;
+      break;
+    case "CONTROL":
+      CameraController.down = true;
+      break;
   }
 });
 document.addEventListener("keyup", (e) => {
@@ -61,8 +73,15 @@ document.addEventListener("keyup", (e) => {
     case "D":
       CameraController.right = false;
       break;
-    case "SHIFT":
+    case " ":
       CameraController.speed = false;
+      break;
+    case "SHIFT":
+      CameraController.up = false;
+      break;
+    case "CONTROL":
+      CameraController.down = false;
+      break;
   }
 });
 
