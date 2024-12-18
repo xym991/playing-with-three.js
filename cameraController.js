@@ -2,12 +2,11 @@ import * as _3 from "three";
 
 const CameraController = {
   camera: new _3.PerspectiveCamera(
-    75,
+    90,
     window.innerWidth / window.innerHeight,
     0.1,
-    100000
+    300000
   ),
-  light: new _3.PointLight(0xffffff, 10, 100),
   forward: false,
   backward: false,
   right: false,
@@ -16,8 +15,7 @@ const CameraController = {
   up: false,
   down: false,
   adjustCameraPosition: function () {
-    // console.log(this.forward, this.backward, this.left, this.right);
-    let val = this.speed ? 10 : 1;
+    let val = this.speed ? 1000 : 10;
     if (this.forward) this.camera.position.z -= val;
     if (this.backward) this.camera.position.z += val;
     if (this.right) this.camera.position.x += val;
@@ -25,7 +23,6 @@ const CameraController = {
     if (this.up) this.camera.position.y += val;
     if (this.down) this.camera.position.y -= val;
 
-    this.light.position.set(...this.camera.position);
     // console.log(this.light.position);
   },
   init: function (scene) {

@@ -1,34 +1,24 @@
 import * as _3 from "three";
 import CameraController from "./cameraController.js";
 import createObjects from "./objectGenerator.js";
-//create a scene
 const scene = new _3.Scene();
 scene.background = new _3.Color("#000");
 
-//create a cube
-// const geometry = new _3.SphereGeometry(100, 1000, 1000);
-// const material = new _3.MeshStandardMaterial({
-//   color: "#468585",
-//   // emissive: "#468585",
-// });
-
-// const cube = new _3.Mesh(geometry, material);
-// cube.position.set(0, 0, 0);
-// scene.add(cube);
-
-//add lighting
-const light = new _3.AmbientLight(0xffffff, 200);
+const light = new _3.AmbientLight(0xff0000, 600);
+const light1 = new _3.AmbientLight(0x00ff00, 500);
+const light2 = new _3.AmbientLight(0x0000ff, 500);
 light.position.set(0, 0, 0);
-scene.add(light);
 
-// setup rendered
-const renderer = new _3.WebGLRenderer();
+scene.add(light);
+scene.add(light1);
+scene.add(light2);
+
+const renderer = new _3.WebGLRenderer({
+  antialias: false,
+  powerPreference: "high-performance",
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-
-// renderer.render(scene, camera);
-
-//animate
 
 createObjects(scene);
 function animate() {
